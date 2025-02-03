@@ -51,7 +51,6 @@ class MLPLoRA(model.Model):
 
     def train(self, mode=True):
         super().train(mode=mode)
-        # 根据 model 设置 lora layer 的参数是否合并
         self.linear1.train(mode)
         self.linear2.train(mode)
 
@@ -101,7 +100,6 @@ if __name__ == '__main__':
     model.set_optimizer(sgd)
     model.compile([tx], is_train=True, use_graph=args.graph, sequential=True)
     model.train()
-    print("11111")
     print(model.get_params())
     for i in range(10):
         # generate the training data
@@ -115,15 +113,11 @@ if __name__ == '__main__':
         out, loss = model(tx, ty, 'plain', spars=None)
         print("training loss = ", tensor.to_numpy(loss)[0])
         print(model.get_params())
-    print("22222")
     print(model.get_params())
     model.eval()
-    print("evvvvvv")
     print(model.get_params())
-    print("333")
     model.train()
     print(model.get_params())
-    print("5555")
     model.eval()
     for i in range(3):
         # generate the training data
@@ -137,6 +131,5 @@ if __name__ == '__main__':
         out = model(tx)
         print("eval out = ", tensor.to_numpy(out)[0])
     print(model.get_params())
-    print("4444")
 
 
